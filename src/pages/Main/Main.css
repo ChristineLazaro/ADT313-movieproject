@@ -1,39 +1,58 @@
-.Main {
-  display: flex;
-  overflow: hidden;
-  max-height: 100vh;
-}
-.Main .container {
-  display: flex;
-  width: 100vw;
-}
-.Main .container .outlet {
-  flex-grow: 3;
-  padding: 1rem;
-}
 .Main .container .navigation {
-  background-color: aliceblue;
+  background-color: rgb(12, 12, 12); 
   padding-top: 40px;
   height: 100vh;
-}
-.Main .container .navigation ul {
-  list-style: none;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
 }
 
 .Main .container .navigation ul li {
   padding: 10px 80px 10px 20px;
 }
+
+.Main .container .navigation ul li a {
+  color: white; /* White text */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.Main .container .navigation ul li a:hover {
+  color: rgb(124, 237, 225); /* Red hover text */
+}
+
 .Main .container .navigation ul li.active,
 .Main .container .navigation ul li:hover {
-  background: #ccc;
-}
-.Main .container .navigation ul li a {
-  text-decoration: none;
+  background-color: rgb(120, 225, 242); /* Black background on hover or active */
+  color: rgb(12, 12, 12); /* Red text on hover or active */
 }
 
 .Main .container .navigation ul li.logout {
   cursor: pointer;
 }
+
+.Main .container .navigation ul li.logout:hover {
+  color: red;
+}
+
+.Main {
+  display: flex;
+  overflow: hidden;
+  max-height: 100vh;
+  background-color: rgb(52, 52, 52); /* Black background for the main container */
+}
+
+.Main .container {
+  display: flex;
+  width: 100vw;
+}
+
+.Main .container .outlet {
+  flex-grow: 3;
+  padding: 1rem;
+  background-color: rgb(80, 78, 78); 
+}
+
+.Main .container .navigation ul {
+  list-style-type: none; /* Removes the bullet points */
+  padding: 0;
+  margin: 0;
+}
+

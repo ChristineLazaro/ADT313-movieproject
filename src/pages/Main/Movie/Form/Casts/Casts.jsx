@@ -1,206 +1,126 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import './Casts.css';
 
-
 function Casts() {
+  const { tmdbId } = useParams();
+  const [castInfo, setCastInfo] = useState([]);
+  const [formState, setFormState] = useState({ mode: "base", cast: {} });
+  const [data, setData] = useState({
+    url: '',
+    name: '',
+    characterName: '',
+    // description: ''
+  });
 
-const [selectedCast, setSelectedCast] = useState([]);
+  const accessToken = localStorage.getItem("accessToken");
+  const user = JSON.parse(localStorage.getItem("user"));
 
-let {tmdbId} = useParams();
-
-const [castInfo, setCastInfo] = useState([]);
-const [data,setData] = useState([]);
-
-const accessToken = localStorage.getItem("accessToken");
-const user = JSON.parse(localStorage.getItem('user'))
-
-const handleOnChange = (e) => {
-    const{name, value} = e.target; 
-
-    setSelectedCast((prevData) => ({
-        ...prevData,
-        [name]: value,
-    }))
-}
-
-
-
-useEffect(()=>{
-    axios({
-        method: 'get',
-        url: `/casts`,
-        headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-        },
+  useEffect(() => {
+    axios.get('/casts', {
+      headers: { Authorization: `Bearer ${accessToken}` }
     }).then((response) => {
-        setCastInfo(response.data)
-        console.log(response.data)
-    })
-},[])
+      setCastInfo(response.data);
+    });
+  }, [accessToken]);
 
-const handleSave = async (event) => {
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    if (formState.mode === "add") {
+      setData((prev) => ({ ...prev, [name]: value }));
+    } else {
+      setFormState((prev) => ({
+        ...prev,
+        cast: { ...prev.cast, [name]: value },
+      }));
+    }
+  };
 
-
+  const handleSave = () => {
     const formData = new FormData();
     formData.append('userId', user.userId);
     formData.append('movieId', tmdbId);
-    formData.append('description', data.description);
-    // formData.append('cast', file); // Use the state variable file
-    formData.append('name', data.name);
-    formData.append('characterName', data.characterName);
-    formData.append('url', data.url);
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
 
-
-    axios({
-      method: 'post',
-      url: '/casts',
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
-      })
+    axios.post('/casts', formData, {
+      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${accessToken}` }
+    }).then((response) => {
+      console.log(response.data);
+      setCastInfo([...castInfo, response.data]); 
+      setFormState({ mode: "base", cast: {} });
+    });
   };
 
-const handleUpdate = async (event) => {
+  const handleUpdate = () => {
+    const updatedCast = formState.cast;
+    axios.patch(`/casts/${updatedCast.id}`, updatedCast, {
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` }
+    }).then((response) => {
+      console.log(response.data);
+      setCastInfo((prev) => prev.map(cast => cast.id === updatedCast.id ? response.data : cast));
+      setFormState({ mode: "base", cast: {} });
+    });
+  };
 
-    const data = {
-        id: selectedCast.id,
-        userId: selectedCast.userId,
-        movieId: tmdbId,
-        name: selectedCast.name,
-        characterName: selectedCast.characterName,
-        description: selectedCast.description,
-        url: selectedCast.url
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this cast?')) {
+      axios.delete(`/casts/${id}`, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      }).then(() => {
+        console.log('Database Updated');
+        setCastInfo(castInfo.filter(cast => cast.id !== id)); 
+      });
     }
-    axios({
-        method: 'patch',
-        url: `/casts/${selectedCast.id}`,
-        data: data,
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-        },
-    })
-    .then((response) => {
-        console.log(response.data);
-    })
+  };
 
-}
-
-const handleDelete = (id) => {
-    const isConfirmed = window.confirm('Are you sure you want to delete this cast?');
-    if(isConfirmed){
-        axios({
-            method: 'delete',
-            url: `/casts/${id}`,
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        })
-        .then((response)=> {
-            console.log('Database Updated');
-        })
-    }
-}
-
-const [state, setState] = useState("base");
-
-const renderForm = () => {
-    if (state === "add") {
-      return (
-        <div>
-          <form>
-            <label className='castProfile'>
-              Cast Profile
-              <input className="castImg" type="text" name="url" value={data.url} onChange={handleOnChange} />
-            </label>
-            <label>
-              Cast Name
-              <input className="castName" type="text" name="name" value={data.name} onChange={handleOnChange} />
-            </label>
-            <label>
-              Cast Character Name
-              <input className="castCharName" type="text" name="characterName" value={data.characterName} onChange={handleOnChange} />
-            </label>
-            <label>
-              Cast Description
-              <input className="castDesc" type="text" name="description" value={data.description} onChange={handleOnChange} />
-            </label>
-          </form>
-          <button onClick={handleSave}>Save</button>
-        </div>
-      );
-    } else if(state === "update"){
-      return(<div>
+  const renderForm = () => {
+    const currentCast = formState.mode === "update" ? formState.cast : data;
+    return (
+      <div>
         <form>
-          CastProfile
-          <input className="castImg" type="text" name='url' value={selectedCast.url} onChange={handleOnChange}/>
-          CastName
-          <input className="castName" type="text" name='name' value={selectedCast.name} onChange={handleOnChange}/>
-          castCharacterName
-          <input className="castCharName" type="text" name='characterName' value={selectedCast.characterName} onChange={handleOnChange}/>
-          CastDescription
-          <input className="castDesc" type="text" name='description' value={selectedCast.description} onChange={handleOnChange}/>
+          <label>
+            Cast Profile
+            <input className="castImg" type="text" name="url" value={currentCast.url} onChange={handleOnChange} />
+          </label>
+          <label>
+            Cast Name
+            <input className="castName" type="text" name="name" value={currentCast.name} onChange={handleOnChange} />
+          </label>
+          <label>
+            Character Name
+            <input className="castCharName" type="text" name="characterName" value={currentCast.characterName} onChange={handleOnChange} />
+          </label>
+          {/* <label>
+            Description
+            <input className="castDesc" type="text" name="description" value={currentCast.description} onChange={handleOnChange} />
+          </label> */}
         </form>
-        <button onClick={handleUpdate}>Save</button>
-      </div>)
-    }
+        <button onClick={formState.mode === "add" ? handleSave : handleUpdate}>
+          {formState.mode === "add" ? "Save" : "Update"}
+        </button>
+      </div>
+    );
   };
-
-
 
   return (
     <div>
-        <button className = "button-Add" onClick = {() => state == "base" ? setState("add"): setState("base")}>Add Cast</button>
-        {renderForm()}
+      <button className="button-Add" onClick={() => setFormState({ mode: formState.mode === "base" ? "add" : "base", cast: {} })}>
+        {formState.mode === "base" ? "Add Cast" : "Cancel"}
+      </button>
+      {(formState.mode === "add" || formState.mode === "update") && renderForm()}
 
-      {castInfo.map((cast) => (
-        cast.movieId === parseInt(tmdbId) && (
-        <div>
-            <img src={cast.url}/>
-            <h1>{cast.name}</h1>
-            <h3>{cast.characterName}</h3>
-            <button onClick={()=> {setSelectedCast(cast); setState("update")}}>Edit</button>
-            <button onClick={() => handleDelete(cast.id)}>Delete</button>
+      {castInfo.filter(cast => cast.movieId === parseInt(tmdbId)).map((cast) => (
+        <div key={cast.id}>
+          <img src={cast.url} alt={cast.name} />
+          <h1>{cast.name}</h1>
+          <h3>{cast.characterName}</h3>
+          <button onClick={() => setFormState({ mode: "update", cast })}>Edit</button>
+          <button onClick={() => handleDelete(cast.id)}>Delete</button>
         </div>
-      )))}
-    
-
-        {/* <form>
-            castProfile
-            <input type="text" name = 'url' value={data.url} onChange={handleOnChange}/>
-            castName
-            <input type="text" name = 'name' value={data.name} onChange={handleOnChange}/>
-            castCharacterName
-            <input type="text" name = 'characterName' value={data.characterName} onChange={handleOnChange}/>
-            castDescription
-            <input type="text" name = 'description' value={data.description} onChange={handleOnChange}/>
-        </form>
-        <button onClick={handleSave}>Save</button> */}
-
-
-        {/* <form>
-            castProfile
-            <input type="text" name = 'url' value={selectedCast.url} onChange={handleOnChange}/>
-            castName
-            <input type="text" name = 'name' value={selectedCast.name} onChange={handleOnChange}/>
-            castCharacterName
-            <input type="text" name = 'characterName' value={selectedCast.characterName} onChange={handleOnChange}/>
-            castDescription
-            <input type="text" name = 'description' value={selectedCast.description} onChange={handleOnChange}/>
-        </form>
-        <button onClick={handleUpdate}>Save</button>
-        <button onClick={handleDelete}>Delete</button> */}
-
+      ))}
     </div>
-  )
+  );
 }
 
-export default Casts
+export default Casts;

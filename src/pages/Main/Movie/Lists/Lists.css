@@ -1,98 +1,99 @@
-/* Lists.css */
 .lists-container {
-  font-family: 'Arial', sans-serif;
-  background-color: #121212; /* Dark background for a cinematic feel */
-  color: #fff; /* White text for contrast */
   padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #121212;
   min-height: 100vh;
+  color: #f5f5f5;
 }
 
 .create-container {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 20px;
-  text-align: center;
 }
 
 .create-container button {
-  background-color: #e50914; /* Netflix-inspired red */
-  color: #fff;
+  padding: 10px 20px;
+  background-color: #66fcf1;
+  color: white;
   border: none;
-  width: 100px;
-  margin-left: 1150px;
-  padding: 7px 5px; /* Reduced padding for a smaller button */
-  font-size: 14px; /* Slightly smaller font */
-  font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
   transition: background-color 0.3s ease;
+  box-shadow: #66fcf1;
 }
 
 .create-container button:hover {
-  background-color: #b00710; /* Darker red on hover */
+  background-color: #66fcf1;
 }
 
 .table-container {
-  overflow-x: auto; /* For responsiveness */
+  overflow-x: auto;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
 }
 
 .movie-lists {
   width: 100%;
   border-collapse: collapse;
-  background-color: #1c1c1c; /* Slightly lighter than the main background */
 }
 
 .movie-lists th,
 .movie-lists td {
-  padding: 10px; /* Reduced padding for compact rows */
+  padding: 12px 20px;
   text-align: left;
-  border-bottom: 1px solid #333; /* Subtle dividers */
 }
 
 .movie-lists th {
-  background-color: #333; /* Darker for table headers */
-  text-transform: uppercase;
-  font-size: 14px;
+  background-color: #66fcf1;
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
 }
 
-.movie-lists tr:hover {
-  background-color: #282828; /* Highlight row on hover */
+.movie-lists tbody tr:nth-child(even) {
+  background-color: #2a2a2a;
 }
 
-.movie-lists td button {
-  background-color: #4caf50; /* Green for edit */
-  color: #fff;
+.movie-lists tbody tr:nth-child(odd) {
+  background-color: #1c1c1c;
+}
+
+.movie-lists tbody tr:hover {
+  background-color: #333333;
+}
+
+.movie-lists td {
+  border-bottom: 1px solid #3d3d3d;
+  color: #f5f5f5;
+}
+
+.movie-lists button {
+  padding: 8px 16px;
   border: none;
-  width: 100px;
-  padding: 6px 10px; /* Smaller button padding */
-  font-size: 12px; /* Smaller font size */
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-right: 8px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
-.movie-lists td button:last-child {
-  background-color: #f44336; /* Red for delete */
+.movie-lists button:first-child {
+  background-color: #45a290;
+  color: black;
+  margin-right: 10px; 
 }
 
-.movie-lists td button:hover {
-  opacity: 0.8;
+.movie-lists button:first-child:hover {
+  background-color: #66fcf1;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .movie-lists th,
-  .movie-lists td {
-    padding: 20px;
-    font-size: 12px;
-  }
+.movie-lists button:last-child {
+  background-color: #66fcf1;
+  color: white;
+}
 
-  .create-container button {
-    font-size: 12px;
-    padding: 6px 12px; /* Adjusted for responsiveness */
-  }
-
-  .movie-lists td button {
-    font-size: 10px; /* Smaller buttons on smaller screens */
-    padding: 5px 8px;
-  }
+.movie-lists button:last-child:hover {
+  background-color: #66fcf1;
 }
