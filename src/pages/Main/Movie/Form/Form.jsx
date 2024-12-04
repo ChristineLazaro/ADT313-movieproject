@@ -21,7 +21,7 @@ const Form = () => {
       headers: {
         Accept: 'application/json',
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTdiNmUyNGJkNWRkNjhiNmE1ZWFjZjgyNWY3NGY5ZCIsIm5iZiI6MTcyOTI5NzI5Ny4wNzMzNTEsInN1YiI6IjY2MzhlZGM0MmZhZjRkMDEzMGM2NzM3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZIX4EF2yAKl6NwhcmhZucxSQi1rJDZiGG80tDd6_9XI', 
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2N2UzOTY1NWFiNWMwYjJiZTIzNDczZDQ4M2ZiNGFmNCIsIm5iZiI6MTczMzMzMTE0My40OTEwMDAyLCJzdWIiOiI2NzUwODhjNzY1NjcwMmE3OTJmZmJmM2QiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.-Y-hBxsQ3ycAuRywWOvxhas_-s12qYssYvFgJy47sMw', 
       },
     })
       .then((response) => {
@@ -69,7 +69,7 @@ const Form = () => {
     request
       .then((saveResponse) => {
         console.log(saveResponse);
-        alert('Success');
+        alert('Successfully updated the movie details!');
         navigate('/main/movies');
       })
       .catch((error) => {

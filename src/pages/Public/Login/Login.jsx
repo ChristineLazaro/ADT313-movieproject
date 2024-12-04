@@ -28,7 +28,6 @@ function Login() {
     switch (type) {
       case 'email':
         setEmail(event.target.value);
-
         break;
 
       case 'password':
@@ -60,7 +59,7 @@ function Login() {
       .catch((e) => {
         console.log(e);
         setStatus('idle');
-         alert(e.response.data.message);
+        alert(e.response.data.message);
       });
   };
 
@@ -69,44 +68,45 @@ function Login() {
   }, [userInputDebounce]);
 
   return (
-    <div className='Login'>
-      <div className='main-container'>
-        <h3>Login</h3>
+    <div className='login-page-container'>
+      <div className='form-wrapper'>
+        <h3>Welcome back, Admin!</h3>
+        <p>Ready to manage your movie listings?</p>
         <form>
-          <div className='form-container'>
+          <div className='login-form-wrapper'>
             <div>
-              <div className='form-group'>
-                <label>E-mail:</label>
+              <div className='input-group'>
                 <input
                   type='text'
                   name='email'
                   ref={emailRef}
                   onChange={(e) => handleOnChange(e, 'email')}
+                  placeholder="Enter your email" 
                 />
               </div>
-              {debounceState && isFieldsDirty && email == '' && (
-                <span className='errors'>This field is required</span>
+              {debounceState && isFieldsDirty && email === '' && (
+                <span className='input-error'>This field is required</span>
               )}
             </div>
             <div>
-              <div className='form-group'>
-                <label>Password:</label>
+              <div className='input-group'>
                 <input
                   type={isShowPassword ? 'text' : 'password'}
                   name='password'
                   ref={passwordRef}
                   onChange={(e) => handleOnChange(e, 'password')}
+                  placeholder="Enter your password" 
                 />
               </div>
-              {debounceState && isFieldsDirty && password == '' && (
-                <span className='errors'>This field is required</span>
+              {debounceState && isFieldsDirty && password === '' && (
+                <span className='input-error'>This field is required</span>
               )}
             </div>
-            <div className='show-password' onClick={handleShowPassword}>
-              {isShowPassword ? 'Hide' : 'Show'} Password
+            <div className='password-toggle' onClick={handleShowPassword}>
+              <i className={`fa ${isShowPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
             </div>
 
-            <div className='submit-container'>
+            <div className='login-button-container'>
               <button
                 type='button'
                 disabled={status === 'loading'}
@@ -121,11 +121,11 @@ function Login() {
                     });
                   } else {
                     setIsFieldsDirty(true);
-                    if (email == '') {
+                    if (email === '') {
                       emailRef.current.focus();
                     }
 
-                    if (password == '') {
+                    if (password === '') {
                       passwordRef.current.focus();
                     }
                   }
@@ -134,7 +134,7 @@ function Login() {
                 {status === 'idle' ? 'Login' : 'Loading'}
               </button>
             </div>
-            <div className='register-container'>
+            <div className='register-link'>
               <a href='/register'>
                 <small>Register</small>
               </a>

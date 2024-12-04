@@ -9,19 +9,19 @@
 }
 
 .Main .container .navigation ul li a {
-  color: white; /* White text */
+  color: white; 
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .Main .container .navigation ul li a:hover {
-  color: rgb(124, 237, 225); /* Red hover text */
+  color: rgb(124, 237, 225); 
 }
 
 .Main .container .navigation ul li.active,
 .Main .container .navigation ul li:hover {
-  background-color: rgb(120, 225, 242); /* Black background on hover or active */
-  color: rgb(12, 12, 12); /* Red text on hover or active */
+  background-color: rgb(120, 225, 242); 
+  color: rgb(12, 12, 12); 
 }
 
 .Main .container .navigation ul li.logout {
@@ -36,7 +36,7 @@
   display: flex;
   overflow: hidden;
   max-height: 100vh;
-  background-color: rgb(52, 52, 52); /* Black background for the main container */
+  background-color: rgb(52, 52, 52);
 }
 
 .Main .container {
@@ -51,7 +51,7 @@
 }
 
 .Main .container .navigation ul {
-  list-style-type: none; /* Removes the bullet points */
+  list-style-type: none; 
   padding: 0;
   margin: 0;
 }

@@ -19,7 +19,7 @@ const Lists = () => {
 
   const handleDelete = (id) => {
     const isConfirm = window.confirm(
-      'Are you sure that you want to delete this data?'
+      'Do you really want to delete this data?'
     );
     if (isConfirm) {
       axios

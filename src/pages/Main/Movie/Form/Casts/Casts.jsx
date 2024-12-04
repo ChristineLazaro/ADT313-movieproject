@@ -11,9 +11,9 @@ function Casts() {
     url: '',
     name: '',
     characterName: '',
-    // description: ''
   });
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const [importedCast, setImportedCast] = useState([]);
   const accessToken = localStorage.getItem("accessToken");
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -47,7 +47,7 @@ function Casts() {
       headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${accessToken}` }
     }).then((response) => {
       console.log(response.data);
-      setCastInfo([...castInfo, response.data]); 
+      setCastInfo([...castInfo, response.data]);
       setFormState({ mode: "base", cast: {} });
     });
   };
@@ -74,6 +74,45 @@ function Casts() {
     }
   };
 
+  const handleImportCast = async () => {
+    if (!searchQuery) {
+      alert("Please enter a movie name.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=67e39655ab5c0b2be23473d483fb4af4&query=${searchQuery}`);
+      const movie = response.data.results[0]; 
+      if (!movie) {
+        alert("No movie found with that name.");
+        return;
+      }
+
+      const castResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=67e39655ab5c0b2be23473d483fb4af4`);
+      setImportedCast(castResponse.data.cast); 
+    } catch (error) {
+      console.error("Error fetching cast data from TMDb:", error);
+      alert("Error fetching cast data.");
+    }
+  };
+
+  const handleAddImportedCast = (cast) => {
+    const formData = new FormData();
+    formData.append('userId', user.userId);
+    formData.append('movieId', tmdbId);
+    formData.append('url', `https://image.tmdb.org/t/p/w200${cast.profile_path}`);
+    formData.append('name', cast.name);
+    formData.append('characterName', cast.character);
+
+    axios.post('/casts', formData, {
+      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${accessToken}` }
+    }).then((response) => {
+      console.log(response.data);
+      setCastInfo([...castInfo, response.data]);
+      setImportedCast([]); 
+    });
+  };
+
   const renderForm = () => {
     const currentCast = formState.mode === "update" ? formState.cast : data;
     return (
@@ -91,10 +130,6 @@ function Casts() {
             Character Name
             <input className="castCharName" type="text" name="characterName" value={currentCast.characterName} onChange={handleOnChange} />
           </label>
-          {/* <label>
-            Description
-            <input className="castDesc" type="text" name="description" value={currentCast.description} onChange={handleOnChange} />
-          </label> */}
         </form>
         <button onClick={formState.mode === "add" ? handleSave : handleUpdate}>
           {formState.mode === "add" ? "Save" : "Update"}
@@ -108,7 +143,32 @@ function Casts() {
       <button className="button-Add" onClick={() => setFormState({ mode: formState.mode === "base" ? "add" : "base", cast: {} })}>
         {formState.mode === "base" ? "Add Cast" : "Cancel"}
       </button>
+      <button className="button-Import" onClick={handleImportCast}>
+        Import Cast from TMDb
+      </button>
+      <input
+        type="text"
+        placeholder="Search for a movie"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       {(formState.mode === "add" || formState.mode === "update") && renderForm()}
+
+      {importedCast.length > 0 && (
+        <div>
+          <h2>Imported Cast:</h2>
+          {importedCast.map((cast) => (
+            <div key={cast.cast_id}>
+              <img src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`} alt={cast.name} />
+              <h3>{cast.name}</h3>
+              <h4>{cast.character}</h4>
+              <button onClick={() => handleAddImportedCast(cast)}>
+                Add to My Cast
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {castInfo.filter(cast => cast.movieId === parseInt(tmdbId)).map((cast) => (
         <div key={cast.id}>

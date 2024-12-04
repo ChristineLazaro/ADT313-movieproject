@@ -1,23 +1,142 @@
- .castProfile{
-    color: blue;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 20px;
- }
- 
- .castImg {
-    border-radius: 5px;
-    color: blue;
-    padding: 3px;
-}
-.button-Add:hover{
-    background-color: hsl(216, 74%, 21%);
-}
 
-.button-Add{
-    border-radius: 10px;
-    color: hsl(216, 100%, 58%);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 15px;
+.Main .container .navigation {
+    background-color: rgb(12, 12, 12); 
+    padding-top: 40px;
+    height: 100vh;
+  }
+  
+  .Main .container .navigation ul li {
+    padding: 10px 80px 10px 20px;
+  }
+  
+  .Main .container .navigation ul li a {
+    color: white; 
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .Main .container .navigation ul li a:hover {
+    color: rgb(124, 237, 225); 
+  }
+  
+  .Main .container .navigation ul li.active,
+  .Main .container .navigation ul li:hover {
+    background-color: rgb(120, 225, 242); 
+    color: rgb(12, 12, 12); 
+  }
+  
+  .Main .container .navigation ul li.logout {
+    cursor: pointer;
+  }
+  
+  .Main .container .navigation ul li.logout:hover {
+    color: red; 
+  }
+  
+  /* Casts Component Specific Styling */
+  .Main .container .outlet {
+    flex-grow: 3;
+    padding: 1rem;
+    background-color: rgb(80, 78, 78); 
+  }
+  
+  .castImg, .castName, .castCharName {
+    width: 100%;
     padding: 10px;
-
-}
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: rgb(230, 230, 230); 
+  }
+  
+  .castImg {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(120, 225, 242); 
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: rgb(124, 237, 225); 
+  }
+  
+  button:active {
+    background-color: rgb(12, 12, 12); 
+  }
+  
+  /* Styling for Cast Info Cards */
+  .castInfoCard {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: rgb(230, 230, 230); 
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .castInfoCard img {
+    width: 80px;
+    height: 120px;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+  
+  .castInfoCard h1 {
+    color: rgb(12, 12, 12); 
+    font-size: 1.5rem;
+  }
+  
+  .castInfoCard h3 {
+    color: rgb(80, 78, 78); 
+  }
+  
+  .button-Add, .button-Import {
+    background-color: rgb(120, 225, 242); 
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .button-Add:hover, .button-Import:hover {
+    background-color: rgb(124, 237, 225); 
+  }
+  
+  /* Styling for Imported Cast Section */
+  .importedCastSection {
+    margin-top: 20px;
+  }
+  
+  .importedCastSection h2 {
+    color: rgb(12, 12, 12); 
+  }
+  
+  .importedCastSection img {
+    width: 100px;
+    height: 150px;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+  
+  .importedCastSection button {
+    background-color: rgb(120, 225, 242); 
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .importedCastSection button:hover {
+    background-color: rgb(124, 237, 225);
+  }
+  
