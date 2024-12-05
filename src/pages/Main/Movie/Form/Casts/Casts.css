@@ -1,142 +1,164 @@
+.casts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
 
-.Main .container .navigation {
-    background-color: rgb(12, 12, 12); 
-    padding-top: 40px;
-    height: 100vh;
-  }
-  
-  .Main .container .navigation ul li {
-    padding: 10px 80px 10px 20px;
-  }
-  
-  .Main .container .navigation ul li a {
-    color: white; 
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .Main .container .navigation ul li a:hover {
-    color: rgb(124, 237, 225); 
-  }
-  
-  .Main .container .navigation ul li.active,
-  .Main .container .navigation ul li:hover {
-    background-color: rgb(120, 225, 242); 
-    color: rgb(12, 12, 12); 
-  }
-  
-  .Main .container .navigation ul li.logout {
-    cursor: pointer;
-  }
-  
-  .Main .container .navigation ul li.logout:hover {
-    color: red; 
-  }
-  
-  /* Casts Component Specific Styling */
-  .Main .container .outlet {
-    flex-grow: 3;
-    padding: 1rem;
-    background-color: rgb(80, 78, 78); 
-  }
-  
-  .castImg, .castName, .castCharName {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: rgb(230, 230, 230); 
-  }
-  
-  .castImg {
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(120, 225, 242); 
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: rgb(124, 237, 225); 
-  }
-  
-  button:active {
-    background-color: rgb(12, 12, 12); 
-  }
-  
-  /* Styling for Cast Info Cards */
-  .castInfoCard {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: rgb(230, 230, 230); 
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  .castInfoCard img {
-    width: 80px;
-    height: 120px;
-    border-radius: 5px;
-    margin-right: 15px;
-  }
-  
-  .castInfoCard h1 {
-    color: rgb(12, 12, 12); 
-    font-size: 1.5rem;
-  }
-  
-  .castInfoCard h3 {
-    color: rgb(80, 78, 78); 
-  }
-  
-  .button-Add, .button-Import {
-    background-color: rgb(120, 225, 242); 
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .button-Add:hover, .button-Import:hover {
-    background-color: rgb(124, 237, 225); 
-  }
-  
-  /* Styling for Imported Cast Section */
-  .importedCastSection {
-    margin-top: 20px;
-  }
-  
-  .importedCastSection h2 {
-    color: rgb(12, 12, 12); 
-  }
-  
-  .importedCastSection img {
-    width: 100px;
-    height: 150px;
-    border-radius: 5px;
-    margin-right: 15px;
-  }
-  
-  .importedCastSection button {
-    background-color: rgb(120, 225, 242); 
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .importedCastSection button:hover {
-    background-color: rgb(124, 237, 225);
-  }
-  
+
+.cast-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 250px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.cast-card-img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.cast-card-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+}
+
+.cast-card-character {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.cast-card-edit-btn,
+.cast-card-delete-btn {
+  background-color: rgb(120, 225, 242);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.cast-card-edit-btn {
+  background-color: #008CBA;
+}
+
+.cast-card-edit-btn:hover {
+  background-color: rgb(120, 225, 242);
+}
+
+.cast-card-delete-btn {
+  background-color: rgb(120, 225, 242);
+}
+
+.cast-card-delete-btn:hover {
+  background-color: #008CBA;
+}
+
+
+input {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: rgb(120, 225, 242);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: rgb(120, 225, 242);
+}
+
+
+.button-Import {
+  background-color: #008CBA;
+}
+
+.button-Import:hover {
+  background-color: rgb(120, 225, 242);
+}
+
+.button-Add {
+  background-color: rgb(120, 225, 242);
+}
+
+.button-Add:hover {
+  background-color: #007B9E;
+}
+
+
+.imported-cast-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+
+.imported-cast-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 250px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.imported-cast-img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+
+.imported-cast-card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+}
+
+
+.imported-cast-card h4 {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+
+.imported-cast-card button {
+  background-color: rgb(120, 225, 242);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.imported-cast-card button:hover {
+  background-color: #45a290;
+}
+
+.button-Add, .button-Import {
+  margin-right: 20px; 
+  margin-bottom: 10px; 
+}

@@ -145,7 +145,7 @@ const Form = () => {
         </>
       )}
 
-      <div className='container'>
+      <div className='info-container'>
         <form>
           {selectedMovie && (
             <img

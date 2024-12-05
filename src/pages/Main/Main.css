@@ -1,56 +1,58 @@
-.Main .container .navigation {
+.container-main .layout-dashboard .sidebar-navigation {
   background-color: rgb(12, 12, 12); 
   padding-top: 40px;
   height: 100vh;
 }
 
-.Main .container .navigation ul li {
+.container-main .layout-dashboard .sidebar-navigation ul .link-item {
   padding: 10px 80px 10px 20px;
 }
 
-.Main .container .navigation ul li a {
+.container-main .layout-dashboard .sidebar-navigation ul .link-anchor {
   color: white; 
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.Main .container .navigation ul li a:hover {
+.container-main .layout-dashboard .sidebar-navigation ul .link-anchor:hover {
   color: rgb(124, 237, 225); 
 }
 
-.Main .container .navigation ul li.active,
-.Main .container .navigation ul li:hover {
+.container-main .layout-dashboard .sidebar-navigation ul .link-item.active,
+.container-main .layout-dashboard .sidebar-navigation ul .link-item:hover {
   background-color: rgb(120, 225, 242); 
   color: rgb(12, 12, 12); 
 }
 
-.Main .container .navigation ul li.logout {
+.container-main .layout-dashboard .sidebar-navigation ul .logout-link {
   cursor: pointer;
 }
 
-.Main .container .navigation ul li.logout:hover {
+.container-main .layout-dashboard .sidebar-navigation ul .logout-link:hover {
   color: red;
 }
 
-.Main {
+.container-main {
   display: flex;
   overflow: hidden;
   max-height: 100vh;
   background-color: rgb(52, 52, 52);
 }
 
-.Main .container {
+.container-main .layout-dashboard {
   display: flex;
   width: 100vw;
 }
 
-.Main .container .outlet {
+.container-main .layout-dashboard .content-display {
   flex-grow: 3;
   padding: 1rem;
-  background-color: rgb(80, 78, 78); 
+  background-color: rgb(0, 0, 0); 
+  border: 2px solid rgb(120, 225, 242); 
+  overflow-y: auto;
 }
 
-.Main .container .navigation ul {
+.container-main .layout-dashboard .sidebar-navigation ul {
   list-style-type: none; 
   padding: 0;
   margin: 0;

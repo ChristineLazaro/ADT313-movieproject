@@ -26,11 +26,11 @@ const router = createBrowserRouter([
     path: '/main',
     element: <Main />,
     children: [
-      //Temporarily disabled the dashboard route
-      {
-        path: '/main/dashboard',
-        element: <Dashboard />,
-      },
+      // //Temporarily disabled the dashboard route
+      // {
+      //   path: '/main/dashboard',
+      //   element: <Dashboard />,
+      // },
       {
         path: '/main/movies',
         element: <Movie />,

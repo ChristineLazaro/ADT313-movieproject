@@ -157,28 +157,32 @@ function Casts() {
       {importedCast.length > 0 && (
         <div>
           <h2>Imported Cast:</h2>
-          {importedCast.map((cast) => (
-            <div key={cast.cast_id}>
-              <img src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`} alt={cast.name} />
-              <h3>{cast.name}</h3>
-              <h4>{cast.character}</h4>
-              <button onClick={() => handleAddImportedCast(cast)}>
-                Add to My Cast
-              </button>
-            </div>
-          ))}
+          <div className="imported-cast-container">
+            {importedCast.map((cast) => (
+              <div key={cast.cast_id} className="imported-cast-card">
+                <img src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`} alt={cast.name} className="imported-cast-img" />
+                <h3>{cast.name}</h3>
+                <h4>{cast.character}</h4>
+                <button onClick={() => handleAddImportedCast(cast)}>
+                  Add to My Cast
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
-      {castInfo.filter(cast => cast.movieId === parseInt(tmdbId)).map((cast) => (
-        <div key={cast.id}>
-          <img src={cast.url} alt={cast.name} />
-          <h1>{cast.name}</h1>
-          <h3>{cast.characterName}</h3>
-          <button onClick={() => setFormState({ mode: "update", cast })}>Edit</button>
-          <button onClick={() => handleDelete(cast.id)}>Delete</button>
-        </div>
-      ))}
+      <div className="casts-container">
+        {castInfo.filter(cast => cast.movieId === parseInt(tmdbId)).map((cast) => (
+          <div key={cast.id} className="cast-card">
+            <img src={cast.url} alt={cast.name} className="cast-card-img" />
+            <h1 className="cast-card-name">{cast.name}</h1>
+            <h3 className="cast-card-character">{cast.characterName}</h3>
+            <button className="cast-card-edit-btn" onClick={() => setFormState({ mode: "update", cast })}>Edit</button>
+            <button className="cast-card-delete-btn" onClick={() => handleDelete(cast.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

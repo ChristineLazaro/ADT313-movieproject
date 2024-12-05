@@ -1,0 +1,118 @@
+
+.tmdb-video-item,
+  video-item {
+    background-color: #ffffff; 
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    padding: 20px;
+    margin: 10px 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .tmdb-video-item:hover {
+    transform: scale(1.05); 
+  }
+  
+  .tmdb-video-item h4 {
+    font-size: 18px;
+    color: #333; 
+    margin-bottom: 10px;
+  }
+  
+
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  form input[type="text"] {
+    margin-bottom: 15px;
+  }
+  
+  form select {
+    margin-bottom: 15px;
+  }
+  
+ 
+  iframe.video-iframe {
+    width: 100%;
+    height: 315px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 20px;
+  }
+  
+  div h2 {
+    font-size: 22px;
+    color: #007bff; 
+  }
+  
+  div p {
+    color: #555; 
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .tmdb-videos {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .tmdb-video-item {
+    width: 30%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .tmdb-video-item button {
+    background-color: rgb(120, 225, 242); 
+  }
+  
+  .tmdb-video-item button:hover {
+    background-color: #008CBA; 
+  }
+  
+
+  button {
+    background-color: rgb(120, 225, 242);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #008CBA;
+  }
+  
+
+  button + button {
+    background-color: #008CBA; 
+  }
+  
+  button + button:hover {
+    background-color: rgb(120, 225, 242);
+  }
+
+  input[type="text"] {
+    width: 50%;
+    margin: 10px 0;
+  }
+  
+  button {
+    background-color: rgb(120, 225, 242);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  button:hover {
+    background-color: #008CBA;
+  }
+  
