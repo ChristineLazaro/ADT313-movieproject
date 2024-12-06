@@ -1,0 +1,189 @@
+.photos-container {
+    padding: 20px;
+}
+
+.toggle-photo-form-button,
+.import-photo-button {
+    background-color: rgb(120, 225, 242);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block; 
+}
+
+.toggle-photo-form-button:hover,
+.import-photo-button:hover {
+    background-color: #008CBA;
+}
+
+.search-container {
+   
+    align-items: left;
+    margin-top: 20px;
+}
+
+.search-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.search-button {
+    background-color: rgb(120, 225, 242);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #008CBA;
+}
+
+.tmdb-photo-item,
+.added-photo-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px 0;
+    transition: transform 0.3s ease;
+}
+
+.tmdb-photo-item:hover,
+.added-photo-item:hover {
+    transform: scale(1.05);
+}
+
+.tmdb-photo,
+.added-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.photo-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.edit-photo-button,
+.delete-photo-button {
+    background-color: rgb(120, 225, 242);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.edit-photo-button:hover,
+.delete-photo-button:hover {
+    background-color: #008CBA;
+}
+
+.photo-form-container {
+    border-radius: 10px; 
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.photo-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.photo-form-input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.photo-form-button {
+    background-color: rgb(120, 225, 242);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.photo-form-button:hover {
+    background-color: #008CBA;
+}
+
+.tmdb-photos-title,
+.added-photos-title {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.tmdb-photos-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tmdb-photo-item {
+    width: 30%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.added-photos-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.added-photo-item {
+    width: 30%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+.add-photo-container {
+    display: none; 
+    margin-top: 20px;
+}
+
+.add-photo-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-photo-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-photo-form button {
+    background-color: rgb(120, 225, 242);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-photo-form button:hover {
+    background-color: #008CBA;
+}

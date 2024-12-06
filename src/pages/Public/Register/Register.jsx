@@ -83,7 +83,7 @@ function Register() {
         <h3>Create a New Account</h3>
         <p>Join us and manage your movie listings today!</p>
         <form>
-          <div className='register-form-wrapper'>
+          <div className='register-form-wrapper1'>
             <div>
               <div className='input-group'>
                 <input

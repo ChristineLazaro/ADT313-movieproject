@@ -6,21 +6,29 @@
   padding: 20px;
 }
 
-
 .cast-card {
   background-color: #fff;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  width: 250px;
-  text-align: center;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  margin: 10px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
+.cast-card:hover {
+  transform: scale(1.05); 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.cast-card:active {
+  transform: scale(0.98); 
+}
 
 .cast-card-img {
   width: 100%;
-  border-radius: 5px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .cast-card-name {
@@ -63,7 +71,6 @@
   background-color: #008CBA;
 }
 
-
 input {
   margin-bottom: 10px;
   padding: 8px;
@@ -86,7 +93,6 @@ button:hover {
   background-color: rgb(120, 225, 242);
 }
 
-
 .button-Import {
   background-color: #008CBA;
 }
@@ -103,7 +109,6 @@ button:hover {
   background-color: #007B9E;
 }
 
-
 .imported-cast-container {
   display: flex;
   flex-wrap: wrap;
@@ -112,23 +117,28 @@ button:hover {
   padding: 20px;
 }
 
-
 .imported-cast-card {
   background-color: #fff;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  width: 250px;
-  text-align: center;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  margin: 10px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
+.imported-cast-card:hover {
+  transform: scale(1.05); 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.imported-cast-card:active {
+  transform: scale(0.98); 
+}
 
 .imported-cast-img {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
 }
-
 
 .imported-cast-card h3 {
   font-size: 1.2rem;
@@ -137,13 +147,11 @@ button:hover {
   margin: 10px 0;
 }
 
-
 .imported-cast-card h4 {
   font-size: 1rem;
   color: #555;
   margin-bottom: 15px;
 }
-
 
 .imported-cast-card button {
   background-color: rgb(120, 225, 242);

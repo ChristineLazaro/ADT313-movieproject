@@ -1,0 +1,135 @@
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('C:/Users/christine/ADT313-movieproject/bg2.png') no-repeat center center;
+  background-size: cover;
+  margin: 0;
+  overflow: hidden;
+}
+
+.form-wrapper {
+  padding: 3rem 2rem;
+  border: 3px solid rgb(124, 237, 225);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);      
+  max-width: 400px;
+  width: 90%; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); 
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.3s ease; 
+}
+
+.form-wrapper:hover {
+  transform: scale(1.02); 
+}
+
+.login-form-wrapper > div {
+  margin-bottom: 10px;
+}
+
+.login-input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login-input-group input {
+  padding: 12px;
+  border: 2px solid rgb(124, 237, 225);
+  border-radius: 8px; 
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: rgb(124, 237, 225);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  margin-bottom: 16px;
+}
+
+.login-input-group input:focus {
+  border-color: rgb(63, 196, 183); 
+}
+
+.login-input-group input::placeholder {
+  color: rgb(180, 237, 225);
+ 
+}
+
+.input-error {
+  color: red;
+  font-size: 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.password-toggle {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: rgb(124, 237, 225);
+  font-size: 14px;
+  text-align: right;
+  transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+  color: rgb(63, 196, 183);
+}
+
+.login-button-container {
+  margin-top: 16px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(124, 237, 225);
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: rgb(63, 196, 183);
+  transform: translateY(-2px); 
+}
+
+.register-link {
+  margin-top: 12px;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: rgb(124, 237, 225);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 14px;
+  color: rgb(180, 237, 225);
+}
+
+.register-link a {
+  color: rgb(124, 237, 225);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: rgb(63, 196, 183);
+  text-decoration: underline;
+}

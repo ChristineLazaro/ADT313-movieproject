@@ -146,12 +146,16 @@ function Casts() {
       <button className="button-Import" onClick={handleImportCast}>
         Import Cast from TMDb
       </button>
-      <input
-        type="text"
-        placeholder="Search for a movie"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+      <div>
+        <input
+          type="text"
+          placeholder="Search for a movie"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="button-Search" onClick={handleImportCast}>Search</button>
+      </div>
+
       {(formState.mode === "add" || formState.mode === "update") && renderForm()}
 
       {importedCast.length > 0 && (

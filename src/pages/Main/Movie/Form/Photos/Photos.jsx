@@ -73,16 +73,19 @@ function Photos() {
   };
 
   const searchMoviePhotos = () => {
+    if (searchQuery.trim() === "") return; // Prevent empty searches
     axios
       .get(`https://api.themoviedb.org/3/movie/${tmdbId}/images`, {
         params: { api_key: apiKey },
       })
       .then((response) => {
         const { backdrops } = response.data;
-        const photos = backdrops.map((photo) => ({
-          url: `https://image.tmdb.org/t/p/w500${photo.file_path}`,
-          description: "Photo from TMDB",
-        }));
+        const photos = backdrops
+          .filter(photo => photo.file_path.includes(searchQuery)) // Filter photos based on search query
+          .map((photo) => ({
+            url: `https://image.tmdb.org/t/p/w500${photo.file_path}`,
+            description: "Photo from TMDB",
+          }));
         setTmdbPhotos(photos);
       });
   };
@@ -104,18 +107,30 @@ function Photos() {
   const renderForm = () => {
     const currentPhoto = formState.mode === "update" ? formState.photo : data;
     return (
-      <div>
-        <form>
-          <label>
+      <div className="photo-form-container">
+        <form className="photo-form">
+          <label className="photo-form-label">
             Photo URL
-            <input type="text" name="url" value={currentPhoto.url} onChange={handleOnChange} />
+            <input
+              type="text"
+              name="url"
+              value={currentPhoto.url}
+              onChange={handleOnChange}
+              className="photo-form-input"
+            />
           </label>
-          <label>
+          <label className="photo-form-label">
             Description
-            <input type="text" name="description" value={currentPhoto.description} onChange={handleOnChange} />
+            <input
+              type="text"
+              name="description"
+              value={currentPhoto.description}
+              onChange={handleOnChange}
+              className="photo-form-input"
+            />
           </label>
         </form>
-        <button onClick={formState.mode === "add" ? handleSave : handleUpdate}>
+        <button className="photo-form-button" onClick={formState.mode === "add" ? handleSave : handleUpdate}>
           {formState.mode === "add" ? "Save" : "Update"}
         </button>
       </div>
@@ -123,35 +138,49 @@ function Photos() {
   };
 
   return (
-    <div>
-      <button onClick={() => setFormState({ mode: formState.mode === "base" ? "add" : "base", photo: {} })}>
+    <div className="photos-container">
+      <button className="toggle-photo-form-button" onClick={() => setFormState({ mode: formState.mode === "base" ? "add" : "base", photo: {} })}>
         {formState.mode === "base" ? "Add Photo" : "Cancel"}
       </button>
-      <button onClick={searchMoviePhotos}>Import Photos</button>
+      <button className="import-photo-button" onClick={searchMoviePhotos}>Import Photos</button>
+
+      {/* Search input field for searching specific TMDB photos */}
+      <div className="search-container">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+          placeholder="Search for a photo..."
+        />
+        <button className="search-button" onClick={searchMoviePhotos}>Search</button>
+      </div>
 
       {(formState.mode === "add" || formState.mode === "update") && renderForm()}
 
-      <h3>Photos from TMDB:</h3>
-      <div className="tmdb-photos">
+      <h3 className="tmdb-photos-title">Photos from TMDB:</h3>
+      <div className="tmdb-photos-container">
         {tmdbPhotos.map((photo, index) => (
-          <div key={index}>
-            <img src={photo.url} alt={photo.description} />
-            <button onClick={() => importPhoto(photo)}>Import</button>
+          <div key={index} className="tmdb-photo-item">
+            <img className="tmdb-photo" src={photo.url} alt={photo.description} />
+            <button className="import-photo-button" onClick={() => importPhoto(photo)}>Import</button>
           </div>
         ))}
       </div>
 
-      <h3>Added Photos:</h3>
-      {photoInfo
-        .filter(photo => photo.movieId === parseInt(tmdbId))
-        .map((photo) => (
-          <div key={photo.id}>
-            <img src={photo.url} alt={photo.description} />
-            <p>{photo.description}</p>
-            <button onClick={() => setFormState({ mode: "update", photo })}>Edit</button>
-            <button onClick={() => handleDelete(photo.id)}>Delete</button>
-          </div>
-        ))}
+      <h3 className="added-photos-title">Added Photos:</h3>
+      <div className="added-photos-container">
+        {photoInfo
+          .filter(photo => photo.movieId === parseInt(tmdbId))
+          .map((photo) => (
+            <div key={photo.id} className="added-photo-item">
+              <img className="added-photo" src={photo.url} alt={photo.description} />
+              <p className="photo-description">{photo.description}</p>
+              <button className="edit-photo-button" onClick={() => setFormState({ mode: "update", photo })}>Edit</button>
+              <button className="delete-photo-button" onClick={() => handleDelete(photo.id)}>Delete</button>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

@@ -75,7 +75,7 @@ function Login() {
         <form>
           <div className='login-form-wrapper'>
             <div>
-              <div className='input-group'>
+              <div className='login-input-group'>
                 <input
                   type='text'
                   name='email'
@@ -89,7 +89,7 @@ function Login() {
               )}
             </div>
             <div>
-              <div className='input-group'>
+              <div className='login-input-group'>
                 <input
                   type={isShowPassword ? 'text' : 'password'}
                   name='password'
