@@ -13,6 +13,9 @@
   flex-grow: 3;
   padding: 1rem;
   overflow-y: auto;
+  background: url('C:/Users/christine/ADT313-movieproject/main-bg-cl.png') no-repeat center center;
+  background-size: cover;
+  background-position: center center;
 }
 .Main .container .navigation {
   height: 80px;

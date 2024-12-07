@@ -13,6 +13,7 @@ function Photos() {
   });
   const [tmdbPhotos, setTmdbPhotos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSearch, setShowSearch] = useState(false); // New state for search visibility
 
   const accessToken = localStorage.getItem("accessToken");
   const user = JSON.parse(localStorage.getItem("user"));
@@ -75,18 +76,25 @@ function Photos() {
   const searchMoviePhotos = () => {
     if (searchQuery.trim() === "") return; // Prevent empty searches
     axios
-      .get(`https://api.themoviedb.org/3/movie/${tmdbId}/images`, {
-        params: { api_key: apiKey },
+      .get(`https://api.themoviedb.org/3/search/movie`, {
+        params: { api_key: apiKey, query: searchQuery },
       })
       .then((response) => {
-        const { backdrops } = response.data;
-        const photos = backdrops
-          .filter(photo => photo.file_path.includes(searchQuery)) // Filter photos based on search query
-          .map((photo) => ({
-            url: `https://image.tmdb.org/t/p/w500${photo.file_path}`,
-            description: "Photo from TMDB",
-          }));
-        setTmdbPhotos(photos);
+        if (response.data.results.length > 0) {
+          const movieId = response.data.results[0].id;
+          axios
+            .get(`https://api.themoviedb.org/3/movie/${movieId}/images`, {
+              params: { api_key: apiKey },
+            })
+            .then((imageResponse) => {
+              const { backdrops } = imageResponse.data;
+              const photos = backdrops.map((photo) => ({
+                url: `https://image.tmdb.org/t/p/w500${photo.file_path}`,
+                description: "Photo from TMDB",
+              }));
+              setTmdbPhotos(photos);
+            });
+        }
       });
   };
 
@@ -142,23 +150,26 @@ function Photos() {
       <button className="toggle-photo-form-button" onClick={() => setFormState({ mode: formState.mode === "base" ? "add" : "base", photo: {} })}>
         {formState.mode === "base" ? "Add Photo" : "Cancel"}
       </button>
-      <button className="import-photo-button" onClick={searchMoviePhotos}>Import Photos</button>
+      <button className="import-photo-button" onClick={() => setShowSearch(!showSearch)}>
+        Import Photos from TMDb
+      </button>
 
-      {/* Search input field for searching specific TMDB photos */}
-      <div className="search-container">
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
-          placeholder="Search for a photo..."
-        />
-        <button className="search-button" onClick={searchMoviePhotos}>Search</button>
-      </div>
+      {/* Conditionally render the search input field */}
+      {showSearch && (
+        <div className="search-container">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+            placeholder="Search for a movie..."
+          />
+          <button className="search-button" onClick={searchMoviePhotos}>Search</button>
+        </div>
+      )}
 
       {(formState.mode === "add" || formState.mode === "update") && renderForm()}
 
-      <h3 className="tmdb-photos-title">Photos from TMDB:</h3>
       <div className="tmdb-photos-container">
         {tmdbPhotos.map((photo, index) => (
           <div key={index} className="tmdb-photo-item">
@@ -168,7 +179,6 @@ function Photos() {
         ))}
       </div>
 
-      <h3 className="added-photos-title">Added Photos:</h3>
       <div className="added-photos-container">
         {photoInfo
           .filter(photo => photo.movieId === parseInt(tmdbId))

@@ -14,6 +14,7 @@ function Casts() {
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [importedCast, setImportedCast] = useState([]);
+  const [showSearch, setShowSearch] = useState(false); 
   const accessToken = localStorage.getItem("accessToken");
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -75,6 +76,7 @@ function Casts() {
   };
 
   const handleImportCast = async () => {
+    setShowSearch(true); 
     if (!searchQuery) {
       alert("Please enter a movie name.");
       return;
@@ -143,24 +145,27 @@ function Casts() {
       <button className="button-Add" onClick={() => setFormState({ mode: formState.mode === "base" ? "add" : "base", cast: {} })}>
         {formState.mode === "base" ? "Add Cast" : "Cancel"}
       </button>
-      <button className="button-Import" onClick={handleImportCast}>
+      <button className="button-Import" onClick={() => setShowSearch(true)}>
         Import Cast from TMDb
       </button>
-      <div>
-        <input
-          type="text"
-          placeholder="Search for a movie"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button className="button-Search" onClick={handleImportCast}>Search</button>
-      </div>
+      
+      {showSearch && (
+        <div>
+          <input
+            type="text"
+            placeholder="Search for a movie"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="button-Search" onClick={handleImportCast}>Search</button>
+        </div>
+      )}
 
       {(formState.mode === "add" || formState.mode === "update") && renderForm()}
 
       {importedCast.length > 0 && (
         <div>
-          <h2>Imported Cast:</h2>
+          <h2></h2>
           <div className="imported-cast-container">
             {importedCast.map((cast) => (
               <div key={cast.cast_id} className="imported-cast-card">

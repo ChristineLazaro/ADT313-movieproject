@@ -1,7 +1,7 @@
 .main-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   font-family: 'Arial', sans-serif;
   color: #333;
 }
@@ -12,7 +12,7 @@
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #222;
+  color: rgb(124, 237, 225);
 }
 
 
@@ -62,8 +62,7 @@
 .featured-movie-title {
   font-size: 2.5rem;
   font-weight: bold;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 10px 15px;
+  padding: 40px 15px;
   border-radius: 5px;
 }
 
