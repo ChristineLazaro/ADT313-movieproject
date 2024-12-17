@@ -8,14 +8,13 @@ class CastsGateway
         $this->conn = $database->getConnection();
     }
 
-    public function getAll($movieId): array
+    public function getAll(): array
     {
-        $sql = "SELECT * FROM casts WHERE movieId = :movieId";
+        $sql = "SELECT * FROM casts";
         $res = $this->conn->prepare($sql);
-        $res->bindValue(":movieId",$data["movieId"], PDO::PARAM_INT);
-
         $res->execute();
-        $data = $res->fetch(PDO::FETCH_ASSOC);
+
+        $data = $res->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
@@ -48,15 +47,13 @@ class CastsGateway
 
     public function update(array $current, array $new): int
     {
-        $sql = "UPDATE casts SET name=:name,url=:url,characterName=:characterName, dateUpdate=:dateUpdated WHERE id =:id AND userId = :userId";
+        $sql = "UPDATE casts SET name=:name,url=:url,characterName=:characterName WHERE id =:id AND userId = :userId";
         $res = $this->conn->prepare($sql);
         $dateUpdated = (new DateTime())->getTimeStamp();
         $res->bindValue(":userId",$current["userId"], PDO::PARAM_INT);
-        $res->bindValue(":movieId",$new["movieId"] ?? $current["movieId"], PDO::PARAM_INT);
         $res->bindValue(":name",$new["name"] ?? $current["name"], PDO::PARAM_STR);
         $res->bindValue(":url",$new["url"] ?? $current["url"], PDO::PARAM_STR);
         $res->bindValue(":characterName",$new["characterName"] ?? $current["characterName"], PDO::PARAM_STR);
-        $res->bindValue(":dateUpdated",$dateUpdated, PDO::PARAM_STR);
         $res->bindValue(":id", $current["id"], PDO::PARAM_INT);
 
         $res->execute();

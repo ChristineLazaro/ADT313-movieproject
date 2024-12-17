@@ -90,6 +90,16 @@ switch ($parts[2]) {
         $controller->processRequest($_SERVER["REQUEST_METHOD"], $id);
         break;
 
+    case 'casts':
+            //casts endpoint
+            $id = $parts[3] ?? null;
+    
+            $gateway = new CastsGateway($database);
+    
+            $controller = new CastsController($gateway, $auth);
+            $controller->processRequest($_SERVER["REQUEST_METHOD"], $id);
+            break;
+
 
     default:
         http_response_code(404);

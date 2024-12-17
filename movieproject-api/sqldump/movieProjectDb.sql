@@ -118,7 +118,11 @@ CREATE TABLE `videos` (
   `userId` int(11) NOT NULL,
   `movieId` int(11) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `site` varchar(255) NOT NULL,
+  `videoKey` varchar(255) NOT NULL,
+  `videoType` varchar(255) NOT NULL,
+  `official` tinyint(1) NOT NULL,
   `dateCreated` timestamp NOT NULL DEFAULT current_timestamp(),
   `dateUpdated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
